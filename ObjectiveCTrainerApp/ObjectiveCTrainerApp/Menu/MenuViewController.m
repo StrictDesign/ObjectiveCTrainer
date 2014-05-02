@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewController.h"
+#import "SWRevealViewController.h"
 
 @interface MenuViewController ()
 
@@ -26,7 +27,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Set the delegate and datasource
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    // Fetch the menu items
+    self.menuItems = [[[MenuModel alloc] init] getMenuItems];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,15 +42,66 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+#pragma mark - Table View Delegate Methods
+
+- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.menuItems.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Retrive Cell
+    NSString *cellIdentifier = @"MenuItemCell";
+    UITableViewCell *menuCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    // Get menu item that it's asking for
+    MenuItem *item = self.menuItems[indexPath.row];
+    
+    // Set menu item text and icon
+    menuCell.textLabel.text = item.menuTitle;
+    
+    return menuCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Check wich tab was selected
+    MenuItem *item = self.menuItems[indexPath.row];
+    
+    switch (item.screenType) {
+        case ScreenTypeQuestion:
+            // Go to Questions
+            [self performSegueWithIdentifier:@"GoToQuestionsSegue" sender:self];
+            break;
+        case ScreenTypeStats:
+            // Go to Stats
+            [self performSegueWithIdentifier:@"GoToStatsSegue" sender:self];
+            break;
+        case ScreenTypeAbout:
+            // Go to About
+            [self performSegueWithIdentifier:@"GoToAboutSegue" sender:self];
+            break;
+        case ScreenTypeRemoveAds:
+            // Go to Remove Ads
+            [self performSegueWithIdentifier:@"GoToRemoveAdsSegue" sender:self];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark Segue Methods
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Set the front view controller to the destination one
+    [self.revealViewController setFrontViewController:segue.destinationViewController];
+    
+    // Slide the front view controller back into place
+    [self.revealViewController revealToggleAnimated:YES];
 }
-*/
+
 
 @end

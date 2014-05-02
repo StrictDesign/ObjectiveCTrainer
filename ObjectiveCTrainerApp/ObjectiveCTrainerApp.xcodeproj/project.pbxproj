@@ -29,6 +29,7 @@
 		BFAD70721913DD610018C43A /* RemoveAdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD70711913DD610018C43A /* RemoveAdsViewController.m */; };
 		BFAD70751913DD850018C43A /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD70741913DD850018C43A /* StatsViewController.m */; };
 		BFAD70781913DD9A0018C43A /* StatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD70771913DD9A0018C43A /* StatsModel.m */; };
+		BFAD707B1913E2900018C43A /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD707A1913E2900018C43A /* MenuItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		BFAD70741913DD850018C43A /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsViewController.m; path = Stats/StatsViewController.m; sourceTree = "<group>"; };
 		BFAD70761913DD9A0018C43A /* StatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsModel.h; path = Stats/StatsModel.h; sourceTree = "<group>"; };
 		BFAD70771913DD9A0018C43A /* StatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsModel.m; path = Stats/StatsModel.m; sourceTree = "<group>"; };
+		BFAD70791913E2900018C43A /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuItem.h; path = Menu/MenuItem.h; sourceTree = "<group>"; };
+		BFAD707A1913E2900018C43A /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItem.m; path = Menu/MenuItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,8 @@
 			children = (
 				BFAD706A1913DD040018C43A /* MenuModel.h */,
 				BFAD706B1913DD040018C43A /* MenuModel.m */,
+				BFAD70791913E2900018C43A /* MenuItem.h */,
+				BFAD707A1913E2900018C43A /* MenuItem.m */,
 				BFAD70671913DCE30018C43A /* MenuViewController.h */,
 				BFAD70681913DCE30018C43A /* MenuViewController.m */,
 			);
@@ -354,6 +359,7 @@
 				BFAD70751913DD850018C43A /* StatsViewController.m in Sources */,
 				BFAD702F1913D9AA0018C43A /* main.m in Sources */,
 				BFAD70781913DD9A0018C43A /* StatsModel.m in Sources */,
+				BFAD707B1913E2900018C43A /* MenuItem.m in Sources */,
 				BFAD70631913DC800018C43A /* QuestionViewController.m in Sources */,
 				BFAD70601913DBFD0018C43A /* SWRevealViewController.m in Sources */,
 			);

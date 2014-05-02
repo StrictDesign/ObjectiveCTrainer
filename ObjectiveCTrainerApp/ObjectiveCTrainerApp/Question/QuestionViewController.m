@@ -7,6 +7,7 @@
 //
 
 #import "QuestionViewController.h"
+#import "SWRevealViewController.h"
 
 @interface QuestionViewController ()
 
@@ -26,7 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
+    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
