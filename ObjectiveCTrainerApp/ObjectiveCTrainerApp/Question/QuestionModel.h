@@ -10,4 +10,10 @@
 
 @interface QuestionModel : NSObject
 
+@property (strong, nonatomic) NSMutableArray *easyQuestion;
+@property (strong, nonatomic) NSMutableArray *mediumQuestion;
+@property (strong, nonatomic) NSMutableArray *hardQuestion;
+
+- (NSMutableArray *)getQuestions: (QuizQuestionDifficulty)difficulty;
+
 @end
