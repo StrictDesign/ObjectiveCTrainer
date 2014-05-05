@@ -185,33 +185,24 @@
 
 - (IBAction)questionMCAnswer:(id)sender
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    // Record that they answered an MC question
-    int mcQuestionsAnswered = [userDefaults integerForKey:@"MCQuestionAnswered"];
-    mcQuestionsAnswered++;
-    [userDefaults setInteger:mcQuestionsAnswered forKey:@"MCQuestionsAnswered"];
-    
-    
     UIButton *selectedButton = (UIButton *)sender;
+    BOOL isCorrect = NO;
     
     if (selectedButton.tag == _currentQuestion.correctMCQuestionIndex)
     {
         // User got it right
+        isCorrect = YES;
         
         // TODO: display message for correct answer
         
-        // Record that they answered an MC question correctly
-        int mcQuestionsAnsweredCorrectly = [userDefaults integerForKey:@"MCQuestionAnsweredCorrectly"];
-        mcQuestionsAnsweredCorrectly++;
-        [userDefaults setInteger:mcQuestionsAnsweredCorrectly forKey:@"MCQuestionAnsweredCorrectly"];
     }
     else
     {
         // User got it wrong
     }
     
-    [userDefaults synchronize];
+    // Record questions data
+    [self savedQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
     
     // Display the next question
     [self randomizeQuestionForDisplay];
@@ -223,19 +214,7 @@
     
     // TODO: display message for right answer
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    // Record that they answered an Image question
-    int imageQuestionsAnswered = [userDefaults integerForKey:@"ImageQuestionAnswered"];
-    imageQuestionsAnswered++;
-    [userDefaults setInteger:imageQuestionsAnswered forKey:@"ImageQuestionAnswered"];
-    
-    // Record that they answered an Image question correctly
-    int imageQuestionsAnsweredCorrectly = [userDefaults integerForKey:@"ImageQuestionAnsweredCorrectly"];
-    imageQuestionsAnsweredCorrectly++;
-    [userDefaults setInteger:imageQuestionsAnsweredCorrectly forKey:@"ImageQuestionAnsweredCorrectly"];
-    
-    [userDefaults synchronize];
+    [self savedQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:YES];
     
     // Display the next question
     [self randomizeQuestionForDisplay];
@@ -243,35 +222,91 @@
 
 -(IBAction)blankSubmitted:(id)sender
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    // Record that they answered an Blank question
-    int blankQuestionsAnswered = [userDefaults integerForKey:@"BlankQuestionAnswered"];
-    blankQuestionsAnswered++;
-    [userDefaults setInteger:blankQuestionsAnswered forKey:@"BlankQuestionAnswered"];
-    
     NSString *answer = self.blankTextField.text;
+    BOOL isCorrect = NO;
     
     if ([answer isEqualToString:_currentQuestion.correctAnswerForBlank])
     {
         // User got it right
+        isCorrect = YES;
         
         // TODO: display message for correct answer
-        
-        // Record that they answered an Blank question correctly
-        int blankQuestionsAnsweredCorrectly = [userDefaults integerForKey:@"BlankQuestionAnsweredCorrectly"];
-        blankQuestionsAnsweredCorrectly++;
-        [userDefaults setInteger:blankQuestionsAnsweredCorrectly forKey:@"BlankQuestionAnsweredCorrectly"];
     }
     else
     {
         // User got it wrong
     }
     
-    [userDefaults synchronize];
+    // Record question data
+    [self savedQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
     
     // Display the next question
     [self randomizeQuestionForDisplay];
+}
+
+- (void)savedQuestionData:(QuizQuestionType)type withDifficulty:(QuizQuestionDifficulty)difficulty isCorrect:(BOOL)correct
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // Save data based on type
+    NSString *keyToSaveForType = @"";
+    
+    if (type == QuestionTypeBlank)
+    {
+        // Record that they answered an Blank question
+        keyToSaveForType = @"Blank";
+    }
+    else if (type == QuestionTypeMC)
+    {
+        // Record that they answered an MC question
+        keyToSaveForType = @"MC";
+        
+    }
+    else if (type == QuestionTypeImage)
+    {
+        keyToSaveForType = @"Image";
+    }
+    
+    // Record that they answered a question by type
+    int questionsAnsweredByType = [userDefaults integerForKey:[NSString stringWithFormat:@"%@QuestionAnswered", keyToSaveForType]];
+    questionsAnsweredByType++;
+    [userDefaults setInteger:questionsAnsweredByType forKey:[NSString stringWithFormat:@"%@QuestionAnswered", keyToSaveForType]];
+    
+    // Record that they answered a question correctly by type
+    int questionsAnsweredCorrectlyByType = [userDefaults integerForKey:[NSString stringWithFormat:@"%@QuestionAnsweredCorrectly", keyToSaveForType]];
+    questionsAnsweredCorrectlyByType++;
+    [userDefaults setInteger:questionsAnsweredCorrectlyByType forKey:[NSString stringWithFormat:@"%@QuestionAnsweredCorrectly", keyToSaveForType]];
+    
+    
+    
+    
+    // Save data based on difficulty
+    NSString *keyToSave = @"";
+    
+    if (difficulty == QuestionDifficultyEasy)
+    {
+        keyToSave = @"Easy";
+    }
+    else if (difficulty == QuestionDifficultyMedium)
+    {
+        keyToSave = @"Meduim";
+    }
+    else if (difficulty == QuestionDifficultyHard)
+    {
+        keyToSave = @"Hard";
+    }
+    
+    int questionAnsweredWithDifficulty = [userDefaults integerForKey:[NSString stringWithFormat:@"%@QuestionsAnswered", keyToSave]];
+    questionAnsweredWithDifficulty++;
+    [userDefaults setInteger:questionAnsweredWithDifficulty forKey:[NSString stringWithFormat:@"%@QuestionsAnswered", keyToSave]];
+    if (correct) {
+        int questionAnsweredCorrectlyWithDifficulty = [userDefaults integerForKey:[NSString stringWithFormat:@"%@QuestionsAnsweredCorrectly", keyToSave]];
+        questionAnsweredCorrectlyWithDifficulty++;
+        [userDefaults setInteger:questionAnsweredCorrectlyWithDifficulty forKey:[NSString stringWithFormat:@"%@QuestionsAnsweredCorrectly", keyToSave]];
+    }
+    
+    [userDefaults synchronize];
+
 }
 
 - (void)scrollViewTapped
