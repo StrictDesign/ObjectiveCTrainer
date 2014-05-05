@@ -12,6 +12,7 @@
 @interface QuestionViewController ()
 {
     Question *_currentQuestion;
+    
     UIView *_tappablePortionOfImageQuestion;
     UITapGestureRecognizer *_tapRecognizer;
     UITapGestureRecognizer *_scrollViewTapGestureRecognizer;
@@ -37,7 +38,8 @@
     // Add tap gesture to scrollview
     _scrollViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped)];
     [self.questionScrollView addGestureRecognizer:_scrollViewTapGestureRecognizer];
-
+    
+    // Add pan gesture recognizer for menu reveal
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     // Hide everything
@@ -111,31 +113,13 @@
     [self.questionMCAnswer3 setTitle:_currentQuestion.questionAnswer3 forState:UIControlStateNormal];
     
     // Adjust scrollView
-    self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.size.height + 30);
+    self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.origin.y + self.skipButton.frame.size.height + 30);
     
     // Reveal question elements
     self.questionText.hidden = NO;
     self.questionMCAnswer1.hidden = NO;
     self.questionMCAnswer2.hidden = NO;
     self.questionMCAnswer3.hidden = NO;
-}
-
-- (void)displayBlankQuestion
-{
-    // Hide all the elements
-    [self hideAllQuestionElements];
-    
-    // Set question elements
-    self.questionText.text = _currentQuestion.questionText;
-    
-    // Adjust scrollView
-    self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.size.height + 30);
-    
-    // Reveal question elements
-    self.questionText.hidden = NO;
-    self.submitAnswerForBlankButton.hidden = NO;
-    self.blankTextField.hidden = NO;
-    self.instructionsLabelForBlank.hidden = NO;
 }
 
 - (void)displayImageQuestion
@@ -165,11 +149,29 @@
     self.imageQuestionImageView.hidden = NO;
 }
 
+- (void)displayBlankQuestion
+{
+    // Hide all the elements
+    [self hideAllQuestionElements];
+    
+    // Set question elements
+    self.questionText.text = _currentQuestion.questionText;
+    
+    // Adjust scrollView
+    self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.origin.y + self.skipButton.frame.size.height + 30);
+    
+    // Reveal question elements
+    self.questionText.hidden = NO;
+    self.submitAnswerForBlankButton.hidden = NO;
+    self.blankTextField.hidden = NO;
+    self.instructionsLabelForBlank.hidden = NO;
+}
+
 - (void)randomizeQuestionForDisplay
 {
     // Randomize a question
-    int randdomQuestionIndex = arc4random() % self.questions.count;
-    _currentQuestion = self.questions[randdomQuestionIndex];
+    int randomQuestionIndex = arc4random() % self.questions.count;
+    _currentQuestion = self.questions[randomQuestionIndex];
     
     // Display the question
     [self displayCurrentQuestion];
@@ -237,6 +239,8 @@
         // User got it wrong
     }
     
+    self.blankTextField.text = @"";
+    
     // Record question data
     [self savedQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
     
@@ -299,7 +303,8 @@
     int questionAnsweredWithDifficulty = [userDefaults integerForKey:[NSString stringWithFormat:@"%@QuestionsAnswered", keyToSave]];
     questionAnsweredWithDifficulty++;
     [userDefaults setInteger:questionAnsweredWithDifficulty forKey:[NSString stringWithFormat:@"%@QuestionsAnswered", keyToSave]];
-    if (correct) {
+    if (correct)
+    {
         int questionAnsweredCorrectlyWithDifficulty = [userDefaults integerForKey:[NSString stringWithFormat:@"%@QuestionsAnsweredCorrectly", keyToSave]];
         questionAnsweredCorrectlyWithDifficulty++;
         [userDefaults setInteger:questionAnsweredCorrectlyWithDifficulty forKey:[NSString stringWithFormat:@"%@QuestionsAnsweredCorrectly", keyToSave]];

@@ -31,20 +31,20 @@
     newQuestion.questionDifficulty = QuestionDifficultyEasy;
     newQuestion.questionType = QuestionTypeMC;
     newQuestion.questionText = @"This is a test question";
-    newQuestion.questionAnswer1 = @"Ansver 1";
-    newQuestion.questionAnswer2 = @"Ansver 2";
-    newQuestion.questionAnswer3 = @"Ansver 3";
+    newQuestion.questionAnswer1 = @"Answer 1";
+    newQuestion.questionAnswer2 = @"Answer 2";
+    newQuestion.questionAnswer3 = @"Answer 3";
     newQuestion.correctMCQuestionIndex = 1;
     [self.easyQuestion addObject:newQuestion];
     
     newQuestion = [[Question alloc] init];
-    
     newQuestion.questionDifficulty = QuestionDifficultyEasy;
     newQuestion.questionType = QuestionTypeBlank;
     newQuestion.questionText = @"This is a ______ question";
     newQuestion.correctAnswerForBlank = @"test";
     [self.easyQuestion addObject:newQuestion];
     
+    newQuestion = [[Question alloc] init];
     newQuestion.questionDifficulty = QuestionDifficultyEasy;
     newQuestion.questionType = QuestionTypeImage;
     newQuestion.questionImageName = @"TestQuestionImage";
