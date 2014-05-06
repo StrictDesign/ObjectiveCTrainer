@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Question.h"
 #import "QuestionModel.h"
+#import "ResultView.h"
 
-@interface QuestionViewController : UIViewController
+@interface QuestionViewController : UIViewController<ResultViewProtocol>
 
 @property (strong, nonatomic) QuestionModel *model;
 @property (strong, nonatomic) NSArray *questions;
