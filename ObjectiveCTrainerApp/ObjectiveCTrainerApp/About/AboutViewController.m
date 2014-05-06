@@ -9,6 +9,7 @@
 #import "AboutViewController.h"
 #import "SWRevealViewController.h"
 
+
 @interface AboutViewController ()
 
 @end
@@ -38,15 +39,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (IBAction)feedbackButtonClicked:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+    mailComposer.mailComposeDelegate = self;
+    [mailComposer setSubject:@"Objective C Trainer Feedback"];
+    [mailComposer setToRecipients:@[@"jimmy@mjallby.net"]];
+    
+    [self presentViewController:mailComposer animated:YES completion:nil];
 }
-*/
+
+- (IBAction)rateButtonClicked:(id)sender
+{
+    // TODO: Implement rate app
+}
+
+- (IBAction)moreTutorialsButtonClicked:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mjallby.net"]];
+}
+
+#pragma mark Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    // Dismiss the compose controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

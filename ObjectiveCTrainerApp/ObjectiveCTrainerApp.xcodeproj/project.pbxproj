@@ -10,6 +10,7 @@
 		871C845019177E22008D95EC /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 871C844F19177E22008D95EC /* Question.m */; };
 		874D17191918C71E001DFCEF /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 874D17181918C71E001DFCEF /* questions.json */; };
 		874D171C1918F2D4001DFCEF /* ResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 874D171B1918F2D4001DFCEF /* ResultView.m */; };
+		874D171E19191874001DFCEF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874D171D19191874001DFCEF /* MessageUI.framework */; };
 		BFAD70231913D9AA0018C43A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD70221913D9AA0018C43A /* Foundation.framework */; };
 		BFAD70251913D9AA0018C43A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD70241913D9AA0018C43A /* CoreGraphics.framework */; };
 		BFAD70271913D9AA0018C43A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD70261913D9AA0018C43A /* UIKit.framework */; };
@@ -51,6 +52,7 @@
 		874D17181918C71E001DFCEF /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = questions.json; path = ../../../../../Dropbox/CodeFiles/ObjCTrainer/questions.json; sourceTree = "<group>"; };
 		874D171A1918F2D4001DFCEF /* ResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultView.h; path = Question/ResultView.h; sourceTree = "<group>"; };
 		874D171B1918F2D4001DFCEF /* ResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultView.m; path = Question/ResultView.m; sourceTree = "<group>"; };
+		874D171D19191874001DFCEF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BFAD701F1913D9AA0018C43A /* ObjectiveCTrainerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveCTrainerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAD70221913D9AA0018C43A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFAD70241913D9AA0018C43A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				874D171E19191874001DFCEF /* MessageUI.framework in Frameworks */,
 				BFAD70251913D9AA0018C43A /* CoreGraphics.framework in Frameworks */,
 				BFAD70271913D9AA0018C43A /* UIKit.framework in Frameworks */,
 				BFAD70231913D9AA0018C43A /* Foundation.framework in Frameworks */,
@@ -136,6 +139,7 @@
 		BFAD70211913D9AA0018C43A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				874D171D19191874001DFCEF /* MessageUI.framework */,
 				BFAD70221913D9AA0018C43A /* Foundation.framework */,
 				BFAD70241913D9AA0018C43A /* CoreGraphics.framework */,
 				BFAD70261913D9AA0018C43A /* UIKit.framework */,
