@@ -28,5 +28,6 @@
 @property (nonatomic) int offset_x;
 @property (nonatomic) int offset_y;
 @property (strong, nonatomic) NSString *questionImageName;
+@property (strong, nonatomic) NSString *answerImageName;
 
 @end

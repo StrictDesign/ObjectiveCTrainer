@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		871C845019177E22008D95EC /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 871C844F19177E22008D95EC /* Question.m */; };
+		874D17191918C71E001DFCEF /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 874D17181918C71E001DFCEF /* questions.json */; };
 		BFAD70231913D9AA0018C43A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD70221913D9AA0018C43A /* Foundation.framework */; };
 		BFAD70251913D9AA0018C43A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD70241913D9AA0018C43A /* CoreGraphics.framework */; };
 		BFAD70271913D9AA0018C43A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD70261913D9AA0018C43A /* UIKit.framework */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		871C844E19177E22008D95EC /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Question.h; path = Question/Question.h; sourceTree = "<group>"; };
 		871C844F19177E22008D95EC /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Question.m; path = Question/Question.m; sourceTree = "<group>"; };
+		874D17181918C71E001DFCEF /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = questions.json; path = ../../../../../Dropbox/CodeFiles/ObjCTrainer/questions.json; sourceTree = "<group>"; };
 		BFAD701F1913D9AA0018C43A /* ObjectiveCTrainerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveCTrainerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAD70221913D9AA0018C43A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFAD70241913D9AA0018C43A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -161,6 +163,7 @@
 		BFAD70291913D9AA0018C43A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				874D17181918C71E001DFCEF /* questions.json */,
 				BFAD702A1913D9AA0018C43A /* ObjectiveCTrainerApp-Info.plist */,
 				BFAD702B1913D9AA0018C43A /* InfoPlist.strings */,
 				BFAD702E1913D9AA0018C43A /* main.m */,
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFAD703B1913D9AA0018C43A /* Images.xcassets in Resources */,
+				874D17191918C71E001DFCEF /* questions.json in Resources */,
 				BFAD702D1913D9AA0018C43A /* InfoPlist.strings in Resources */,
 				BFAD70361913D9AA0018C43A /* Main.storyboard in Resources */,
 			);
