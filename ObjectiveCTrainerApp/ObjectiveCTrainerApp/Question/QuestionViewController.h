@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 
 // Properties for MC Questions
+@property (weak, nonatomic) IBOutlet UILabel *questionHeaderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *answerHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionText;
 @property (weak, nonatomic) IBOutlet UIButton *questionMCAnswer1;
 @property (weak, nonatomic) IBOutlet UIButton *questionMCAnswer2;
@@ -29,7 +31,6 @@
 // Properties for Fill in the blank Questions
 @property (weak, nonatomic) IBOutlet UIButton *submitAnswerForBlankButton;
 @property (weak, nonatomic) IBOutlet UITextField *blankTextField;
-@property (weak, nonatomic) IBOutlet UILabel *instructionsLabelForBlank;
 
 // Properties for Image Questions
 @property (weak, nonatomic) IBOutlet UIImageView *imageQuestionImageView;
