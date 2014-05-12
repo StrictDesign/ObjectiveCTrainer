@@ -96,10 +96,32 @@
 
 - (void)hideAllQuestionElements
 {
+    // Hide the header labels
+    self.questionHeaderLabel.alpha = 0.0;
+    self.answerHeaderLabel.alpha = 0.0;
+    
+    // Hide question label and position of the grid
     self.questionText.hidden = YES;
+    CGRect questionTextFrame = self.questionText.frame;
+    questionTextFrame.origin.y = 2000;
+    self.questionText.frame = questionTextFrame;
+    
+    // Hide answer buttons and position of the grid
     self.questionMCAnswer1.hidden = YES;
+    CGRect answerButtonFrame = self.questionMCAnswer1.frame;
+    answerButtonFrame.origin.y = 2000;
+    self.questionMCAnswer1.frame = answerButtonFrame;
+    
     self.questionMCAnswer2.hidden = YES;
+    answerButtonFrame = self.questionMCAnswer2.frame;
+    answerButtonFrame.origin.y = 2000;
+    self.questionMCAnswer2.frame = answerButtonFrame;
+    
     self.questionMCAnswer3.hidden = YES;
+    answerButtonFrame = self.questionMCAnswer3.frame;
+    answerButtonFrame.origin.y = 2000;
+    self.questionMCAnswer3.frame = answerButtonFrame;
+    
     self.submitAnswerForBlankButton.hidden = YES;
     self.blankTextField.hidden = YES;
     self.imageQuestionImageView.hidden = YES;
@@ -156,6 +178,59 @@
     self.questionMCAnswer1.hidden = NO;
     self.questionMCAnswer2.hidden = NO;
     self.questionMCAnswer3.hidden = NO;
+    
+    // Animate the labels and buttons back to their positions
+    [UIView animateWithDuration:1.0 animations:^(void){
+        
+        // Positon the text
+        CGRect questionTextFrame = self.questionText.frame;
+        questionTextFrame.origin.y = 40;
+        self.questionText.frame = questionTextFrame;
+    }];
+    
+    [UIView animateWithDuration:1.0
+                          delay:0.1
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Position the button 1
+                         CGRect answerButton1Frame = self.questionMCAnswer1.frame;
+                         answerButton1Frame.origin.y = 243;
+                         self.questionMCAnswer1.frame = answerButton1Frame;
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:1.0
+                          delay:0.2
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Position the button 2
+                         CGRect answerButton2Frame = self.questionMCAnswer2.frame;
+                         answerButton2Frame.origin.y = 311;
+                         self.questionMCAnswer2.frame = answerButton2Frame;
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:1.0
+                          delay:0.3
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Position the button 3
+                         CGRect answerButton3Frame = self.questionMCAnswer3.frame;
+                         answerButton3Frame.origin.y = 379;
+                         self.questionMCAnswer3.frame = answerButton3Frame;
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:0.5
+                          delay:1
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the header labels
+                         self.questionHeaderLabel.alpha = 1.0;
+                         self.answerHeaderLabel.alpha  = 1.0;
+                         
+                     }
+                     completion:nil];
 }
 
 - (void)displayImageQuestion
