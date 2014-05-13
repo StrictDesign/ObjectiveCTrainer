@@ -123,8 +123,20 @@
     self.questionMCAnswer3.frame = answerButtonFrame;
     
     self.submitAnswerForBlankButton.hidden = YES;
+    answerButtonFrame = self.submitAnswerForBlankButton.frame;
+    answerButtonFrame.origin.y = 2000;
+    self.submitAnswerForBlankButton.frame = answerButtonFrame;
+    
     self.blankTextField.hidden = YES;
-    self.imageQuestionImageView.hidden = YES;
+    answerButtonFrame = self.blankTextField.frame;
+    answerButtonFrame.origin.y = 2000;
+    self.blankTextField.frame = answerButtonFrame;
+    
+    // Set alpha for image view to 0 so that we can fade it in
+    self.imageQuestionImageView.alpha = 0.0;
+    
+    // Set alpha for the skip button
+    self.skipButton.alpha = 0.0;
     
     // Remove the tappable uiview for image questions
     if (_tappablePortionOfImageQuestion.superview != nil)
@@ -172,6 +184,18 @@
     
     // Adjust scrollView
     self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.origin.y + self.skipButton.frame.size.height + 30);
+    
+    // Set Answer label
+    self.answerHeaderLabel.text = @"Answer";
+    
+    // Set Y-Offset
+    CGRect answerLabelFrame = self.answerHeaderLabel.frame;
+    answerLabelFrame.origin.y = 214;
+    answerLabelFrame.size.width = 280;
+    self.answerHeaderLabel.frame = answerLabelFrame;
+    
+    // Resize the answer label to fit multiline of text
+    [self.answerHeaderLabel sizeToFit];
     
     // Reveal question elements
     self.questionText.hidden = NO;
@@ -228,7 +252,15 @@
                          // Reveal the header labels
                          self.questionHeaderLabel.alpha = 1.0;
                          self.answerHeaderLabel.alpha  = 1.0;
-                         
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:1
+                          delay:2
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the skip button
+                         self.skipButton.alpha = 1.0;
                      }
                      completion:nil];
 }
@@ -244,10 +276,10 @@
     UIImage *tempImage = [UIImage imageNamed:_currentQuestion.questionImageName];
     self.imageQuestionImageView.image = tempImage;
     
+    // Resize the imageViewFrame
     CGRect imageViewFrame = self.imageQuestionImageView.frame;
     imageViewFrame.size.height = tempImage.size.height;
     imageViewFrame.size.width = tempImage.size.width;
-    
     self.imageQuestionImageView.frame = imageViewFrame;
     
     // Create tappable part
@@ -255,7 +287,7 @@
     int tappable_y = self.imageQuestionImageView.frame.origin.y + _currentQuestion.offset_y - 10;
     
     _tappablePortionOfImageQuestion = [[UIView alloc] initWithFrame:CGRectMake(tappable_x, tappable_y, 20, 20)];
-    _tappablePortionOfImageQuestion.backgroundColor = [UIColor redColor];
+    _tappablePortionOfImageQuestion.backgroundColor = [UIColor clearColor];
     
     // Create and attach gesture recognizer
     _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageQuestionAnswered)];
@@ -264,7 +296,38 @@
     // Add tappable part
     [self.questionScrollView addSubview:_tappablePortionOfImageQuestion];
     
-    self.imageQuestionImageView.hidden = NO;
+    // Self instruction label
+    self.answerHeaderLabel.text = @"Tap on the error in the image above.";
+    
+    // Set Y-Offset
+    CGRect answerLabelFrame = self.answerHeaderLabel.frame;
+    answerLabelFrame.origin.y = self.imageQuestionImageView.frame.origin.y + self.imageQuestionImageView.frame.size.height + 20;
+    answerLabelFrame.size.width = 280;
+    self.answerHeaderLabel.frame = answerLabelFrame;
+    
+    // Resize the answer label to fit multiline of text
+    [self.answerHeaderLabel sizeToFit];
+    
+    // Animate the elements
+    [UIView animateWithDuration:0.5
+                          delay:0.5
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the instruction label and image
+                         self.answerHeaderLabel.alpha = 1.0;
+                         self.imageQuestionImageView.alpha = 1.0;
+                         
+                         
+                     }
+                     completion:nil];
+    [UIView animateWithDuration:1
+                          delay:1
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the skip button
+                         self.skipButton.alpha = 1.0;
+                     }
+                     completion:nil];
 }
 
 - (void)displayBlankQuestion
@@ -273,27 +336,79 @@
     [self hideAllQuestionElements];
     
     // Set question image for fill in the blank questions
-    // Set Image
     UIImage *tempImage = [UIImage imageNamed:_currentQuestion.questionImageName];
     self.imageQuestionImageView.image = tempImage;
     
+    // Resize imageViewFrame
     CGRect imageViewFrame = self.imageQuestionImageView.frame;
     imageViewFrame.size.height = tempImage.size.height;
     imageViewFrame.size.width = tempImage.size.width;
     self.imageQuestionImageView.frame = imageViewFrame;
     
+    // Self instruction label
+    self.answerHeaderLabel.text = @"Fill in the keyword that is blured in the image above (case-sensitive)";
+    
+    // Set Y-Offset
+    CGRect answerLabelFrame = self.answerHeaderLabel.frame;
+    answerLabelFrame.origin.y = self.imageQuestionImageView.frame.origin.y + self.imageQuestionImageView.frame.size.height + 20;
+    answerLabelFrame.size.width = 280;
+    self.answerHeaderLabel.frame = answerLabelFrame;
+    
+    // Resize the answer label to fit multiline of text
+    [self.answerHeaderLabel sizeToFit];
     
     
-    
-    self.questionText.text = _currentQuestion.questionText;
+    // self.questionText.text = _currentQuestion.questionText;
     
     // Adjust scrollView
     self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.origin.y + self.skipButton.frame.size.height + 30);
     
-    // Reveal question elements
-    self.imageQuestionImageView.hidden = NO;
+    // Animate the elements
+    [UIView animateWithDuration:0.5
+                          delay:0.5
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the instruction label and image
+                         self.answerHeaderLabel.alpha = 1.0;
+                         self.imageQuestionImageView.alpha = 1.0;
+                     }
+                     completion:nil];
+    
+    // Reveal the elements
     self.submitAnswerForBlankButton.hidden = NO;
     self.blankTextField.hidden = NO;
+    
+    [UIView animateWithDuration:1.5
+                          delay:0.3
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the slide in the textbox
+                         CGRect textBoxFrame = self.blankTextField.frame;
+                         textBoxFrame.origin.y = self.answerHeaderLabel.frame.origin.y + self.answerHeaderLabel.frame.size.height + 20;
+                         self.blankTextField.frame = textBoxFrame;
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:1.5
+                          delay:0.5
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the slide in the button
+                         CGRect submitButtonFrame = self.submitAnswerForBlankButton.frame;
+                         submitButtonFrame.origin.y = self.answerHeaderLabel.frame.origin.y + self.answerHeaderLabel.frame.size.height + 20;
+                         self.submitAnswerForBlankButton.frame = submitButtonFrame;
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:1.5
+                          delay:2
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         // Reveal the skip button
+                         self.skipButton.alpha = 1.0;
+                     }
+                     completion:nil];
+    
 }
 
 - (void)randomizeQuestionForDisplay
